@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Three-Tier Architecture</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #f4f4f9; }
+        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Tier 1: Nginx Frontend 🌐</h1>
+        <p>Fetching data from the backend...</p>
+        <h3 id="api-result">Loading...</h3>
+    </div>
+
+    <script>
+        fetch('/api/status')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('api-result').innerText = data.message;
+            })
+            .catch(error => {
+                document.getElementById('api-result').innerText = "Failed to connect to backend API 🔴";
+            });
+    </script>
+</body>
+</html>
