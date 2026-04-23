@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    container_name: tier1_nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    container_name: tier2_flask
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    container_name: tier3_postgres
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydb
